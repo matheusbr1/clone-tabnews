@@ -1,8 +1,11 @@
+name: clone-tabnews
 services:
   database:
+    container_name: postgres-db
     image: "postgres:16.0-alpine3.18"
     environment:
       POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_PASSWORD: "local_password"
+      POSTGRES_DB: "clone_tabnews"
     ports:
       - "5432:5432"
