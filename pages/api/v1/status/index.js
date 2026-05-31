@@ -7,7 +7,7 @@ async function status(_, res) {
   const databaseMaxConnections = maxConnections.rows[0].max_connections
   const connectionsInUse = await database.query({
     text: "SELECT count(*)::int FROM pg_stat_activity WHERE datname = $1;",
-    values: ["postgres"],
+    values: [process.env.POSTGRES_DB],
   })
   const databaseConectionsInUse = connectionsInUse.rows[0].count
 
