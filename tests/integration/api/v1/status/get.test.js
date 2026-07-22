@@ -28,7 +28,6 @@ describe("GET /api/v1/status", () => {
   })
   test("should contain the postgres connections_in_use", async () => {
     const res = await fetchStatus()
-    console.log(res.body.database)
     expect(typeof res.body.database.max_connections).toBe("number")
     expect(res.body.database.connections_in_use).toEqual(1)
     expect(res.body.database.connections_in_use).toBeDefined()
