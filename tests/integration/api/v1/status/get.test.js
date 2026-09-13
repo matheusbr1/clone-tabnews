@@ -1,3 +1,7 @@
+import orquestrator from "tests/orquestrator"
+
+beforeAll(async () => await orquestrator.waitForAllServices())
+
 async function fetchStatus() {
   const res = await fetch("http://localhost:3000/api/v1/status")
   const body = await res.json()
