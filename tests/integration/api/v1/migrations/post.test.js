@@ -1,10 +1,10 @@
 import database from "infra/database"
+import orquestrator from "tests/orquestrator"
 
-async function cleanDatabase() {
-  await database.query("drop schema public cascade; create schema public;")
-}
-
-beforeAll(cleanDatabase)
+beforeAll(async () => {
+  await orquestrator.waitForAllServices() // Aguarda os serviços evitando race-condition
+  await database.query("drop schema public cascade; create schema public;") // Limpa o banco de dados
+})
 
 async function fetchStatus() {
   const res = await fetch("http://localhost:3000/api/v1/migrations", {
