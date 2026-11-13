@@ -10,6 +10,7 @@
     "test:simple": "jest --runInBand",
     "test:watch": "jest --watchAll --runInBand",
     "test:coverage": "jest --coverage",
+    "posttest": "npm run services:stop",
     "services:up": "docker compose -f infra/compose.yml up -d",
     "services:stop": "docker compose -f infra/compose.yml stop",
     "services:down": "docker compose -f infra/compose.yml down",
