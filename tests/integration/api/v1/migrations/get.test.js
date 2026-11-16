@@ -13,10 +13,12 @@ async function fetchStatus() {
 }
 
 describe("GET /api/v1/migrations", () => {
-  test("should return 200", async () => {
-    const res = await fetchStatus()
-    expect(res.status).toBe(200)
-    expect(Array.isArray(res.body)).toBe(true)
-    expect(res.body.length).toBeGreaterThan(0)
+  describe("Anonymous user", () => {
+    test("Running pending migrations", async () => {
+      const res = await fetchStatus()
+      expect(res.status).toBe(200)
+      expect(Array.isArray(res.body)).toBe(true)
+      expect(res.body.length).toBeGreaterThan(0)
+    })
   })
 })

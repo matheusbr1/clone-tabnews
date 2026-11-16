@@ -15,15 +15,18 @@ async function fetchStatus() {
 }
 
 describe("POST /api/v1/migrations", () => {
-  test("should return 200", async () => {
-    const firstRes = await fetchStatus()
-    expect(firstRes.status).toBe(201)
-    expect(Array.isArray(firstRes.body)).toBe(true)
-    expect(firstRes.body.length).toBeGreaterThan(0)
-
-    const secondRes = await fetchStatus()
-    expect(secondRes.status).toBe(200)
-    expect(Array.isArray(secondRes.body)).toBe(true)
-    expect(secondRes.body.length).toBe(0)
+  describe("Anonymous user", () => {
+    test("For the first time", async () => {
+      const firstRes = await fetchStatus()
+      expect(firstRes.status).toBe(201)
+      expect(Array.isArray(firstRes.body)).toBe(true)
+      expect(firstRes.body.length).toBeGreaterThan(0)      
+    })
+    test("For the second time", async () => {
+      const secondRes = await fetchStatus()
+      expect(secondRes.status).toBe(200)
+      expect(Array.isArray(secondRes.body)).toBe(true)
+      expect(secondRes.body.length).toBe(0)
+    })
   })
 })
