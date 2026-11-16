@@ -20,7 +20,7 @@ describe("POST /api/v1/migrations", () => {
       const firstRes = await fetchStatus()
       expect(firstRes.status).toBe(201)
       expect(Array.isArray(firstRes.body)).toBe(true)
-      expect(firstRes.body.length).toBeGreaterThan(0)      
+      expect(firstRes.body.length).toBeGreaterThan(0)
     })
     test("For the second time", async () => {
       const secondRes = await fetchStatus()
