@@ -1,9 +1,8 @@
-import database from "infra/database"
 import orquestrator from "tests/orquestrator"
 
 beforeAll(async () => {
   await orquestrator.waitForAllServices() // Aguarda os serviços evitando race-condition
-  await database.query("drop schema public cascade; create schema public;") // Limpa o banco de dados
+  await orquestrator.clearDatabase() // Limpa o banco de dados
 })
 
 async function fetchStatus() {
@@ -13,10 +12,12 @@ async function fetchStatus() {
 }
 
 describe("GET /api/v1/migrations", () => {
-  test("should return 200", async () => {
-    const res = await fetchStatus()
-    expect(res.status).toBe(200)
-    expect(Array.isArray(res.body)).toBe(true)
-    expect(res.body.length).toBeGreaterThan(0)
+  describe("Anonymous user", () => {
+    test("Running pending migrations", async () => {
+      const res = await fetchStatus()
+      expect(res.status).toBe(200)
+      expect(Array.isArray(res.body)).toBe(true)
+      expect(res.body.length).toBeGreaterThan(0)
+    })
   })
 })
