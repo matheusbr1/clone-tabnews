@@ -1,9 +1,8 @@
-import database from "infra/database"
 import orquestrator from "tests/orquestrator"
 
 beforeAll(async () => {
   await orquestrator.waitForAllServices() // Aguarda os serviços evitando race-condition
-  await database.query("drop schema public cascade; create schema public;") // Limpa o banco de dados
+  await orquestrator.clearDatabase() // Limpa o banco de dados
 })
 
 async function fetchStatus() {
