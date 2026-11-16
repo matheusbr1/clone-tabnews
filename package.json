@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev",
     "prod": "next build && next start",
-    "test": "npm run services:up && npm run wait-for-postgres && concurrently --names next,jest --hide next --kill-others --success command-jest \"sleep 5; next dev\" \"jest --runInBand\"",
+    "test": "npm run services:up && npm run services:wait:database && concurrently --names next,jest --hide next --kill-others --success command-jest \"sleep 5; next dev\" \"jest --runInBand\"",
     "test:simple": "jest --runInBand",
     "test:watch": "jest --watchAll --runInBand --verbose",
     "test:coverage": "jest --coverage",
